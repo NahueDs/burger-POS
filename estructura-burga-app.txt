@@ -1,0 +1,141 @@
+burger-pos/
+├─ package.json
+├─ pnpm-workspace.yaml
+├─ .gitignore
+├─ .env.example
+├─ README.md
+│
+├─ apps/
+│  ├─ tablet-app/
+│  │  ├─ package.json
+│  │  ├─ vite.config.ts
+│  │  ├─ tsconfig.json
+│  │  ├─ index.html
+│  │  └─ src/
+│  │     ├─ main.tsx
+│  │     ├─ App.tsx
+│  │     ├─ routes/
+│  │     │  └─ index.tsx
+│  │     ├─ pages/
+│  │     │  ├─ MenuPage.tsx
+│  │     │  ├─ CartPage.tsx
+│  │     │  └─ OrderStatusPage.tsx
+│  │     ├─ components/
+│  │     │  ├─ ProductCard.tsx
+│  │     │  ├─ ModifierGroup.tsx
+│  │     │  ├─ IngredientToggle.tsx
+│  │     │  ├─ ExtraOption.tsx
+│  │     │  ├─ VariantSelector.tsx
+│  │     │  └─ CartSummary.tsx
+│  │     ├─ hooks/
+│  │     │  ├─ useCart.ts
+│  │     │  └─ useSocket.ts
+│  │     ├─ store/
+│  │     │  └─ cart.store.ts
+│  │     ├─ services/
+│  │     │  ├─ api.ts
+│  │     │  └─ socket.ts
+│  │     ├─ styles/
+│  │     │  └─ global.css
+│  │     ├─ types/
+│  │     │  └─ index.ts
+│  │     └─ utils/
+│  │        └─ money.ts
+│  │
+│  ├─ pos-app/
+│  │  ├─ package.json
+│  │  ├─ vite.config.ts
+│  │  ├─ tsconfig.json
+│  │  ├─ index.html
+│  │  └─ src/
+│  │     ├─ main.tsx
+│  │     ├─ App.tsx
+│  │     ├─ pages/
+│  │     │  ├─ OrdersBoardPage.tsx
+│  │     │  ├─ OrderDetailPage.tsx
+│  │     │  ├─ ProductsPage.tsx
+│  │     │  └─ SettingsPage.tsx
+│  │     ├─ components/
+│  │     │  ├─ OrderCard.tsx
+│  │     │  ├─ StatusBadge.tsx
+│  │     │  ├─ PrinterButton.tsx
+│  │     │  └─ KitchenQueue.tsx
+│  │     ├─ hooks/
+│  │     │  └─ useSocket.ts
+│  │     ├─ services/
+│  │     │  ├─ api.ts
+│  │     │  ├─ socket.ts
+│  │     │  └─ printer.ts
+│  │     ├─ styles/
+│  │     │  └─ global.css
+│  │     └─ types/
+│  │        └─ index.ts
+│  │
+│  └─ server/
+│     ├─ package.json
+│     ├─ tsconfig.json
+│     └─ src/
+│        ├─ index.ts
+│        ├─ app.ts
+│        ├─ config/
+│        │  ├─ env.ts
+│        │  └─ db.ts
+│        ├─ modules/
+│        │  ├─ products/
+│        │  │  ├─ products.controller.ts
+│        │  │  ├─ products.service.ts
+│        │  │  ├─ products.repository.ts
+│        │  │  └─ products.routes.ts
+│        │  ├─ orders/
+│        │  │  ├─ orders.controller.ts
+│        │  │  ├─ orders.service.ts
+│        │  │  ├─ orders.repository.ts
+│        │  │  ├─ orders.routes.ts
+│        │  │  └─ orders.socket.ts
+│        │  ├─ tables/
+│        │  │  ├─ tables.controller.ts
+│        │  │  ├─ tables.service.ts
+│        │  │  ├─ tables.repository.ts
+│        │  │  └─ tables.routes.ts
+│        │  └─ printing/
+│        │     ├─ printing.service.ts
+│        │     └─ ticket-builder.ts
+│        ├─ db/
+│        │  ├─ migrations/
+│        │  ├─ seeds/
+│        │  └─ schema.sql
+│        ├─ middlewares/
+│        │  ├─ error.middleware.ts
+│        │  └─ not-found.middleware.ts
+│        ├─ sockets/
+│        │  ├─ index.ts
+│        │  └─ events.ts
+│        ├─ lib/
+│        │  ├─ logger.ts
+│        │  └─ validators.ts
+│        └─ types/
+│           └─ express.d.ts
+│
+├─ packages/
+│  └─ shared/
+│     ├─ package.json
+│     ├─ tsconfig.json
+│     └─ src/
+│        ├─ index.ts
+│        ├─ types/
+│        │  ├─ product.ts
+│        │  ├─ order.ts
+│        │  ├─ table.ts
+│        │  └─ modifiers.ts
+│        ├─ constants/
+│        │  ├─ order-status.ts
+│        │  └─ socket-events.ts
+│        └─ schemas/
+│           ├─ product.schema.ts
+│           ├─ order.schema.ts
+│           └─ table.schema.ts
+│
+└─ docs/
+   ├─ api-contract.md
+   ├─ socket-events.md
+   └─ ticket-format.md

@@ -1,0 +1,14 @@
+{
+  "name": "burger-pos",
+  "private": true,
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "dev": "pnpm --parallel --filter tablet-app --filter pos-app --filter server dev",
+    "dev:tablet": "pnpm --filter tablet-app dev",
+    "dev:pos": "pnpm --filter pos-app dev",
+    "dev:server": "pnpm --filter server dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint"
+  }
+}

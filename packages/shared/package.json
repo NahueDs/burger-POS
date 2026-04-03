@@ -1,0 +1,15 @@
+{
+  "name": "@burger-pos/shared",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "echo \"lint pending\""
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
