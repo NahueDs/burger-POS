@@ -512,6 +512,7 @@ export default function App() {
         tableId: manualTableId.trim() || "caja",
         items: draftItems.map((entry) => entry.item),
         total: draftTotal,
+        customerName: "Pedido de caja",
         source: "pos",
       };
 

@@ -1,0 +1,120 @@
+[
+  {
+    "id": "C-002",
+    "tableId": "5",
+    "source": "tablet",
+    "status": "pending",
+    "items": [
+      {
+        "id": "burger-smash-1775475919195",
+        "productId": "burger-smash",
+        "productName": "Burger Smash",
+        "basePrice": 6200,
+        "modifiers": [
+          {
+            "groupId": "burger-extras",
+            "groupName": "Extras",
+            "optionId": "extra-cheddar",
+            "optionName": "Cheddar extra",
+            "price": 800
+          },
+          {
+            "groupId": "burger-extras",
+            "groupName": "Extras",
+            "optionId": "extra-bacon",
+            "optionName": "Bacon",
+            "price": 1200
+          },
+          {
+            "groupId": "burger-extras",
+            "groupName": "Extras",
+            "optionId": "double-meat",
+            "optionName": "Doble carne",
+            "price": 1800
+          },
+          {
+            "groupId": "bread-type",
+            "groupName": "Tipo de pan",
+            "optionId": "classic-bread",
+            "optionName": "Clasico",
+            "price": 0
+          }
+        ],
+        "quantity": 1,
+        "total": 10000
+      },
+      {
+        "id": "cola-1775475934251",
+        "productId": "cola",
+        "productName": "Gaseosa Cola",
+        "basePrice": 2200,
+        "modifiers": [
+          {
+            "groupId": "drink-size",
+            "groupName": "Tamano",
+            "optionId": "size-500",
+            "optionName": "500 ml",
+            "price": 700
+          }
+        ],
+        "quantity": 1,
+        "total": 2900
+      },
+      {
+        "id": "cola-1775475936141",
+        "productId": "cola",
+        "productName": "Gaseosa Cola",
+        "basePrice": 2200,
+        "modifiers": [
+          {
+            "groupId": "drink-size",
+            "groupName": "Tamano",
+            "optionId": "size-350",
+            "optionName": "350 ml",
+            "price": 0
+          }
+        ],
+        "quantity": 1,
+        "total": 2200
+      },
+      {
+        "id": "fries-1775475962203",
+        "productId": "fries",
+        "productName": "Papas fritas",
+        "basePrice": 2800,
+        "modifiers": [],
+        "quantity": 1,
+        "total": 2800
+      }
+    ],
+    "total": 17900,
+    "createdAt": "2026-04-06T11:46:10.690Z"
+  },
+  {
+    "id": "C-001",
+    "tableId": "caja",
+    "source": "pos",
+    "status": "pending",
+    "items": [
+      {
+        "id": "pos-burger-classic-1775474774313",
+        "productId": "burger-classic",
+        "productName": "Burger Clasica",
+        "basePrice": 5000,
+        "modifiers": [
+          {
+            "groupId": "bread-type",
+            "groupName": "Tipo de pan",
+            "optionId": "brioche",
+            "optionName": "Brioche",
+            "price": 0
+          }
+        ],
+        "quantity": 1,
+        "total": 5000
+      }
+    ],
+    "total": 5000,
+    "createdAt": "2026-04-06T11:26:15.824Z"
+  }
+]

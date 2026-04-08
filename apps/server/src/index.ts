@@ -326,7 +326,13 @@ app.post("/orders", (req, res) => {
     }
   }
 
-  if (!payload.tableId || !Array.isArray(payload.items) || payload.items.length === 0 || typeof payload.total !== "number") {
+  if (
+    !payload.tableId ||
+    !payload.customerName?.trim() ||
+    !Array.isArray(payload.items) ||
+    payload.items.length === 0 ||
+    typeof payload.total !== "number"
+  ) {
     res.status(400).json({ message: "Pedido invalido" });
     return;
   }
@@ -334,6 +340,8 @@ app.post("/orders", (req, res) => {
   const order: Order = {
     id: getNextDailyOrderId(orders),
     tableId: payload.tableId,
+    customerName: payload.customerName.trim(),
+    customerPhone: payload.customerPhone?.trim() || undefined,
     source: payload.source === "pos" ? "pos" : "tablet",
     status: "pending",
     items: payload.items,

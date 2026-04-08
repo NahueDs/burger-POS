@@ -1,0 +1,29 @@
+[
+  {
+    "id": "C-001",
+    "tableId": "caja",
+    "source": "pos",
+    "status": "pending",
+    "items": [
+      {
+        "id": "pos-burger-smash-1775303727259",
+        "productId": "burger-smash",
+        "productName": "Burger Smash",
+        "basePrice": 6200,
+        "modifiers": [
+          {
+            "groupId": "bread-type",
+            "groupName": "Tipo de pan",
+            "optionId": "brioche",
+            "optionName": "Brioche",
+            "price": 0
+          }
+        ],
+        "quantity": 1,
+        "total": 6200
+      }
+    ],
+    "total": 6200,
+    "createdAt": "2026-04-04T11:55:29.007Z"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "id": "C-001",
+    "tableId": "12",
+    "source": "tablet",
+    "status": "delivered",
+    "items": [
+      {
+        "id": "test-item-1",
+        "productId": "burger-classic",
+        "total": 5800,
+        "basePrice": 5000,
+        "quantity": 1,
+        "productName": "Burger Clasica",
+        "modifiers": [
+          {
+            "price": 0,
+            "groupName": "Ingredientes base",
+            "optionName": "Sin Cebolla",
+            "groupId": "classic-base",
+            "optionId": "onion"
+          },
+          {
+            "price": 800,
+            "groupName": "Extras",
+            "optionName": "Cheddar extra",
+            "groupId": "burger-extras",
+            "optionId": "extra-cheddar"
+          }
+        ]
+      }
+    ],
+    "total": 5800,
+    "createdAt": "2026-04-03T23:48:33.704Z"
+  }
+]

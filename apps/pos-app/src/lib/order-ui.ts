@@ -77,65 +77,111 @@ export function printOrderTicket(order: Order, settings: PublicAppSettings) {
 
       return `
         <div class="item">
-          <div class="item-row">
-            <span>${item.quantity} x ${item.productName}</span>
-            <span>${currencyFormatter.format(item.total)}</span>
-          </div>
+          <div class="item-title">${item.quantity} X ${item.productName}</div>
           ${modifiersHtml}
         </div>
       `;
     })
     .join("");
 
+  const compactDate = new Intl.DateTimeFormat("es-AR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(order.createdAt));
+
   printWindow.document.write(`
     <html>
       <head>
         <title>Comanda ${order.id}</title>
         <style>
+          @page {
+            size: 48mm auto;
+            margin: 0;
+          }
+          * {
+            box-sizing: border-box;
+          }
+          html, body {
+            width: 48mm;
+            margin: 0;
+            padding: 0;
+          }
           body {
-            width: 80mm;
-            margin: 0 auto;
             font-family: monospace;
             color: #111;
-            padding: 8px;
+            padding: 1.5mm;
+            font-size: 12px;
+            line-height: 1.15;
+            font-weight: 700;
+            text-transform: uppercase;
           }
           .ticket { width: 100%; }
-          .center { text-align: center; }
+          .center {
+            text-align: center;
+          }
           .divider {
             border-top: 1px dashed #111;
-            margin: 8px 0;
+            margin: 3px 0;
           }
-          .row, .item-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
+          .meta-line {
+            margin: 1px 0;
+            word-break: break-word;
           }
-          .item { margin-bottom: 8px; }
-          .modifier { margin-left: 8px; font-size: 12px; }
-          .total { font-size: 16px; font-weight: bold; }
-          @media print {
-            body { width: 80mm; }
+          .item {
+            margin-bottom: 3px;
+          }
+          .item-title {
+            font-size: 13px;
+            word-break: break-word;
+          }
+          .modifier {
+            margin-left: 2mm;
+            font-size: 11px;
+            margin-top: 1px;
+            word-break: break-word;
+          }
+          .business-name {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 1px;
+          }
+          .ticket-title {
+            font-size: 13px;
+            font-weight: 800;
+          }
+          .total {
+            font-size: 14px;
+            font-weight: 800;
+            word-break: break-word;
+          }
+          .footer-text {
+            font-size: 11px;
+            margin-top: 1px;
+            word-break: break-word;
           }
         </style>
       </head>
       <body>
         <div class="ticket">
           <div class="center">
-            <strong>${settings.businessName}</strong><br />
-            Comanda de cocina
+            <div class="business-name">${settings.businessName}</div>
+            <div class="ticket-title">Comanda cocina</div>
           </div>
           <div class="divider"></div>
-          <div class="row"><span>Pedido</span><span>${order.id}</span></div>
-          <div class="row"><span>Mesa</span><span>${order.tableId}</span></div>
-          <div class="row"><span>Origen</span><span>${sourceLabel[order.source]}</span></div>
-          <div class="row"><span>Estado</span><span>${statusLabel[order.status]}</span></div>
-          <div class="row"><span>Fecha</span><span>${formatTicketDate(order.createdAt)}</span></div>
+          <div class="meta-line">Pedido: ${order.id}</div>
+          <div class="meta-line">Mesa: ${order.tableId}</div>
+          <div class="meta-line">Origen: ${sourceLabel[order.source]}</div>
+          <div class="meta-line">Estado: ${statusLabel[order.status]}</div>
+          <div class="meta-line">Fecha: ${compactDate}</div>
           <div class="divider"></div>
           ${itemsHtml}
           <div class="divider"></div>
-          <div class="row total"><span>Total</span><span>${currencyFormatter.format(order.total)}</span></div>
+          <div class="total">Total: ${currencyFormatter.format(order.total)}</div>
           <div class="divider"></div>
-          <div class="center">${settings.ticketFooter}</div>
+          <div class="center footer-text">${settings.ticketFooter}</div>
         </div>
       </body>
     </html>

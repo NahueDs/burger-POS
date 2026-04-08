@@ -39,6 +39,8 @@ export default function App() {
   const [selections, setSelections] = useState<SelectionState>({});
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState<OrderItem[]>([]);
+  const [customerName, setCustomerName] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [lastSubmittedOrder, setLastSubmittedOrder] = useState<Order | null>(null);
@@ -175,6 +177,7 @@ export default function App() {
     : 0;
 
   const cartTotal = cartItems.reduce((sum, item) => sum + item.total, 0);
+  const canSubmitOrder = cartItems.length > 0 && customerName.trim().length > 0;
 
   const canAddCurrentItem =
     selectedProduct !== null &&
@@ -238,7 +241,7 @@ export default function App() {
   };
 
   const submitOrder = async () => {
-    if (cartItems.length === 0) {
+    if (!canSubmitOrder) {
       return;
     }
 
@@ -250,6 +253,8 @@ export default function App() {
         tableId,
         items: cartItems,
         total: cartTotal,
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim() || undefined,
         source: "tablet",
       };
 
@@ -267,6 +272,8 @@ export default function App() {
 
       const createdOrder = (await response.json()) as Order;
       setCartItems([]);
+      setCustomerName("");
+      setCustomerPhone("");
       setLastSubmittedOrder(createdOrder);
       setTrackedOrderStatus(createdOrder.status);
       setSubmitMessage(`Pedido enviado. Numero de comanda: ${createdOrder.id}.`);
@@ -275,6 +282,11 @@ export default function App() {
     } finally {
       setIsSubmittingOrder(false);
     }
+  };
+
+  const removeCartItem = (itemId: string) => {
+    setCartItems((current) => current.filter((item) => item.id !== itemId));
+    setSubmitMessage(null);
   };
 
   return (
@@ -329,11 +341,17 @@ export default function App() {
         <CartPanel
           cartItems={cartItems}
           cartTotal={cartTotal}
+          customerName={customerName}
+          customerPhone={customerPhone}
           isSubmittingOrder={isSubmittingOrder}
           lastSubmittedOrder={lastSubmittedOrder}
           settings={settings}
           submitMessage={submitMessage}
           trackedOrderStatus={trackedOrderStatus}
+          canSubmitOrder={canSubmitOrder}
+          onCustomerNameChange={setCustomerName}
+          onCustomerPhoneChange={setCustomerPhone}
+          onRemoveCartItem={removeCartItem}
           onSubmitOrder={submitOrder}
         />
       </section>

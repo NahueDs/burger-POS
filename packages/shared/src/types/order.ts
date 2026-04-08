@@ -23,12 +23,16 @@ export type CreateOrderInput = {
   tableId: string;
   items: OrderItem[];
   total: number;
+  customerName: string;
+  customerPhone?: string;
   source?: OrderSource;
 };
 
 export type Order = {
   id: string;
   tableId: string;
+  customerName: string;
+  customerPhone?: string;
   source: OrderSource;
   status: OrderStatus;
   items: OrderItem[];

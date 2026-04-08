@@ -10,22 +10,34 @@ const currencyFormatter = new Intl.NumberFormat("es-AR", {
 type CartPanelProps = {
   cartItems: OrderItem[];
   cartTotal: number;
+  customerName: string;
+  customerPhone: string;
+  canSubmitOrder: boolean;
   isSubmittingOrder: boolean;
   lastSubmittedOrder: Order | null;
   settings: PublicAppSettings;
   submitMessage: string | null;
   trackedOrderStatus: OrderStatus | null;
+  onCustomerNameChange: (value: string) => void;
+  onCustomerPhoneChange: (value: string) => void;
+  onRemoveCartItem: (itemId: string) => void;
   onSubmitOrder: () => void;
 };
 
 export function CartPanel({
   cartItems,
   cartTotal,
+  customerName,
+  customerPhone,
+  canSubmitOrder,
   isSubmittingOrder,
   lastSubmittedOrder,
   settings,
   submitMessage,
   trackedOrderStatus,
+  onCustomerNameChange,
+  onCustomerPhoneChange,
+  onRemoveCartItem,
   onSubmitOrder,
 }: CartPanelProps) {
   return (
@@ -50,7 +62,12 @@ export function CartPanel({
                 <strong>
                   {item.quantity} x {item.productName}
                 </strong>
-                <strong>{currencyFormatter.format(item.total)}</strong>
+                <div style={styles.cartItemActions}>
+                  <strong>{currencyFormatter.format(item.total)}</strong>
+                  <button onClick={() => onRemoveCartItem(item.id)} style={styles.removeCartButton}>
+                    Quitar
+                  </button>
+                </div>
               </div>
               {item.modifiers.map((modifier) => (
                 <div key={`${item.id}-${modifier.groupId}-${modifier.optionId}`} style={styles.cartModifier}>
@@ -66,12 +83,33 @@ export function CartPanel({
         <strong>{currencyFormatter.format(cartTotal)}</strong>
       </div>
       <p style={styles.cartHelpText}>Verifica tu carrito y confirma cuando este todo correcto.</p>
+      <div style={styles.customerForm}>
+        <label style={styles.fieldLabel}>
+          Nombre y apellido
+          <input
+            value={customerName}
+            onChange={(event) => onCustomerNameChange(event.target.value)}
+            placeholder="Ej: Juan Perez"
+            style={styles.fieldInput}
+          />
+        </label>
+        <label style={styles.fieldLabel}>
+          Telefono (opcional)
+          <input
+            value={customerPhone}
+            onChange={(event) => onCustomerPhoneChange(event.target.value)}
+            placeholder="Ej: 11 5555 5555"
+            style={styles.fieldInput}
+          />
+        </label>
+      </div>
       {submitMessage ? <p style={styles.submitMessage}>{submitMessage}</p> : null}
       {lastSubmittedOrder ? (
         <div style={styles.successCard}>
           <strong>Pedido enviado con exito</strong>
           <span>Comanda {lastSubmittedOrder.id}</span>
           <span>Mesa {lastSubmittedOrder.tableId}</span>
+          <span>{lastSubmittedOrder.customerName}</span>
         </div>
       ) : null}
       {lastSubmittedOrder && trackedOrderStatus ? (
@@ -92,10 +130,10 @@ export function CartPanel({
       ) : null}
       <button
         onClick={onSubmitOrder}
-        disabled={cartItems.length === 0 || isSubmittingOrder}
+        disabled={!canSubmitOrder || isSubmittingOrder}
         style={{
           ...styles.submitOrderButton,
-          ...(cartItems.length === 0 || isSubmittingOrder ? styles.addButtonDisabled : {}),
+          ...(!canSubmitOrder || isSubmittingOrder ? styles.addButtonDisabled : {}),
         }}
       >
         {isSubmittingOrder ? "Enviando..." : "Confirmar pedido"}
